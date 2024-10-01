@@ -6,7 +6,7 @@ public class HealthBar : MonoBehaviour
 {
 
     public GameObject heart1Prefab;
-
+    public string tag;
     public Unit unit;
     //public int currentHP;
     //public int maxHP;
@@ -14,11 +14,24 @@ public class HealthBar : MonoBehaviour
     List<HealthHeart> hearts = new List<HealthHeart>();
 
 
-    /*public void Update()
+    public void Update()
     {
-        currentHP = unit.GetCurrentHP();
-        maxHP = unit.GetMaxHP();
-    }*/
+        //  currentHP = unit.GetCurrentHP();
+        // maxHP = unit.GetMaxHP();
+        if (unit == null)
+        {
+            print("hello");
+            unit = GameObject.FindGameObjectWithTag(tag).GetComponent<Unit>();
+            DrawHearts();
+        }
+    }
+
+    private void Start()
+    {
+        
+      
+        
+    }
 
     public void DrawHearts()
     {
@@ -26,9 +39,16 @@ public class HealthBar : MonoBehaviour
 
         float maxHealthRemainder = unit.MaxHP % 2;
         int heartsToMake = (int)((unit.MaxHP / 2) + maxHealthRemainder);
-        for (int i = 0; i < hearts.Count; i++)
+        for (int i = 0; i < heartsToMake; i++)
         {
             CreateEmptyHeart();
+        }
+
+        for (int i = 0; i < hearts.Count; i++)
+        {
+            int heartStatusRemainder = (int)Mathf.Clamp(unit.CurrentHP - (i * 2), 0, 2);
+            //print($"Hjärta {i} har {heartStatusRemainder}");
+            hearts[i].SetHeartImage((HeartStatus)heartStatusRemainder);
         }
     }
 

@@ -8,4 +8,9 @@ public class MainMenus : MonoBehaviour
     public int Damage = 10;
     public int MaxHP = 50;
     public int CurrentHP = 50;
+
+    public void Play()
+    {
+        SceneManager.LoadScene(1);
+    }
 }

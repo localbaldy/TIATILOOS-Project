@@ -6,6 +6,6 @@ using UnityEngine.UI;
 public class BattleHUD : MonoBehaviour
 {
     
-
+    
 
 }
